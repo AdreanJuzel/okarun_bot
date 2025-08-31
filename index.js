@@ -4,8 +4,8 @@ const { createClient } = require('bedrock-protocol');
 // Create a client
 const client = createClient({
   host: 'Projectwalker-p2Ee.aternos.me',   // Replace with server IP
-  port: 19132,              // Default Bedrock port
-  username: 'MyBot',        // Bot name (Gamertag-like)
+  port: 41372,              // Default Bedrock port
+  username: 'Okarunbot',        // Bot name (Gamertag-like)
   offline: true             // Set to true if server allows offline players (no Xbox login)
 });
 
