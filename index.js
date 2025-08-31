@@ -1,30 +1,38 @@
 // index.js
 const { createClient } = require('bedrock-protocol');
 
-// Create a client
-const client = createClient({
-  host: 'Projectwalker-p2Ee.aternos.me',   // Replace with server IP
-  port: 41372,              // Default Bedrock port
-  username: 'Okarunbot',        // Bot name (Gamertag-like)
-  offline: true             // Set to true if server allows offline players (no Xbox login)
-});
+const SERVER_HOST = 'Projectwalker-p2Ee.aternos.me'; // Your Aternos host
+const SERVER_PORT = 41372;                            // Your Aternos port
+const BOT_NAME = 'Okarunbot';                         // Any name you like
 
-// On login
-client.on('spawn', () => {
-  console.log('✅ Bot has joined the server!');
-});
-
-// On chat message
-client.on('text', (packet) => {
-  console.log(`[CHAT] ${packet.source_name}: ${packet.message}`);
-});
-
-// Send chat after joining
-setTimeout(() => {
-  client.queue('text', {
-    type: 'chat',
-    needs_translation: false,
-    source_name: 'MyBot',
-    message: 'Hello, I am a bot!'
+function startBot() {
+  const client = createClient({
+    host: SERVER_HOST,
+    port: SERVER_PORT,
+    username: BOT_NAME,
+    offline: true,           // Cracked mode
+    reconnect: false         // We'll handle reconnect manually
   });
-}, 5000);
+
+  client.on('spawn', () => {
+    console.log('✅ Bot spawned successfully!');
+    client.write('text', { message: 'Hello from Render!' });
+  });
+
+  client.on('text', (packet) => {
+    console.log(`💬 Message: ${packet.message}`);
+  });
+
+  client.on('disconnect', (packet) => {
+    console.log('❌ Disconnected:', packet.reason || 'Unknown reason');
+    console.log('🔄 Reconnecting in 5 seconds...');
+    setTimeout(startBot, 5000);
+  });
+
+  client.on('error', (err) => {
+    console.log('⚠️ Error:', err.message);
+  });
+}
+
+// Start the bot
+startBot();
