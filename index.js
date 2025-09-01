@@ -1,26 +1,26 @@
-// index.js
 const { createClient } = require('bedrock-protocol');
 
-const SERVER_HOST = 'Projectwalker-p2Ee.aternos.me'; // Your Aternos host
-const SERVER_PORT = 41372;                            // Your Aternos port
-const BOT_NAME = 'Okarunbot';                         // Any name you like
+const SERVER_HOST = 'Projectwalker-p2Ee.aternos.me';
+const SERVER_PORT = 41372;
+const BOT_NAME = 'Okarunbot';
 
 function startBot() {
   const client = createClient({
     host: SERVER_HOST,
     port: SERVER_PORT,
     username: BOT_NAME,
-    offline: true,           // Cracked mode
-    reconnect: false         // We'll handle reconnect manually
+    offline: true,
+    reconnect: false
   });
 
   client.on('spawn', () => {
     console.log('✅ Bot spawned successfully!');
-    client.write('text', { message: 'Hello from Render!' });
   });
 
   client.on('text', (packet) => {
-    console.log(`💬 Message: ${packet.message}`);
+    if (packet.message) {
+        console.log(`💬 Message: ${packet.message}`);
+    }
   });
 
   client.on('disconnect', (packet) => {
@@ -34,5 +34,4 @@ function startBot() {
   });
 }
 
-// Start the bot
 startBot();
