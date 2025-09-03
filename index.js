@@ -3,8 +3,8 @@ const { createClient } = require('bedrock-protocol');
 const express = require('express');
 
 // === ATERNOS BOT SETTINGS ===
-const SERVER_HOST = 'Projectwalker-p2Ee.aternos.me'; // Replace with your Aternos host
-const SERVER_PORT = 41372;                            // Replace with your Aternos port
+const SERVER_HOST = '162.55.95.54'; // Replace with your Aternos host
+const SERVER_PORT = 43150;                            // Replace with your Aternos port
 const BOT_NAME = 'Okarunbot';                         // Bot username
 
 // === HTTP SERVER SETTINGS (Keeps bot alive on hosting like Replit/Glitch) ===
